@@ -2,7 +2,7 @@
 .Rhistory
 .Rapp.history
 
-# Session Data files
+# Session Data files and R binary data (*.RData)
 .RData
 .RDataTmp
 
@@ -47,3 +47,8 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Omit files 
+Ref/
+Input/
+Output/*.RData
