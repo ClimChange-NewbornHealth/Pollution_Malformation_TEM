@@ -77,11 +77,11 @@ tic()
 base$pct1_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[1, ]
 base$t1_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini, 12, base$fechafin)[1, ]
+                          base$idbase, base$fechaini, 13, base$fechafin)[1, ]
 base$t2_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini + 12*7, 12, base$fechafin)[1, ]
-base$t3_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini + 24*7, 12, base$fechafin)[1, ]
+                          base$idbase, base$fechaini + 13*7, 14, base$fechafin)[1, ]
+base$t3_PM25_cs <- mapply(SolutionByDates_trimester3, list(modelopm), "pm",
+                          base$idbase, base$fechaini, base$fechafin)[1, ]
 base$w20_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
                            base$idbase, base$fechaini, 20, base$fechafin)[1, ]
 base$tot_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
@@ -96,11 +96,11 @@ tic()
 base$pct1_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[2, ]
 base$t1_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini, 12, base$fechafin)[2, ]
+                          base$idbase, base$fechaini, 13, base$fechafin)[2, ]
 base$t2_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini + 12*7, 12, base$fechafin)[2, ]
-base$t3_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini + 24*7, 12, base$fechafin)[2, ]
+                          base$idbase, base$fechaini + 13*7, 14, base$fechafin)[2, ]
+base$t3_PM25_sp <- mapply(SolutionByDates_trimester3, list(modelopm), "pm",
+                          base$idbase, base$fechaini, base$fechafin)[2, ]
 base$w20_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
                            base$idbase, base$fechaini, 20, base$fechafin)[2, ]
 base$tot_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
@@ -135,11 +135,11 @@ tic()
 base$pct1_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[1, ]
 base$t1_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini, 12, base$fechafin)[1, ]
+                          base$idbase, base$fechaini, 13, base$fechafin)[1, ]
 base$t2_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini + 12*7, 12, base$fechafin)[1, ]
-base$t3_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini + 24*7, 12, base$fechafin)[1, ]
+                          base$idbase, base$fechaini + 13*7, 14, base$fechafin)[1, ]
+base$t3_Levo_cs <- mapply(SolutionByDates_trimester3, list(modelolevo), "levo",
+                          base$idbase, base$fechaini, base$fechafin)[1, ]
 base$w20_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
                            base$idbase, base$fechaini, 20, base$fechafin)[1, ]
 base$tot_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
@@ -154,11 +154,11 @@ tic()
 base$pct1_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[2, ]
 base$t1_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini, 12, base$fechafin)[2, ]
+                          base$idbase, base$fechaini, 13, base$fechafin)[2, ]
 base$t2_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini + 12*7, 12, base$fechafin)[2, ]
-base$t3_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini + 24*7, 12, base$fechafin)[2, ]
+                          base$idbase, base$fechaini + 13*7, 14, base$fechafin)[2, ]
+base$t3_Levo_sp <- mapply(SolutionByDates_trimester3, list(modelolevo), "levo",
+                          base$idbase, base$fechaini, base$fechafin)[2, ]
 base$w20_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
                            base$idbase, base$fechaini, 20, base$fechafin)[2, ]
 base$tot_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
@@ -190,11 +190,11 @@ tic()
 base$pct1_K_cs <- mapply(SolutionByDates, list(modelok), "k",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[1, ]
 base$t1_K_cs <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini, 12, base$fechafin)[1, ]
+                       base$idbase, base$fechaini, 13, base$fechafin)[1, ]
 base$t2_K_cs <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini + 12*7, 12, base$fechafin)[1, ]
-base$t3_K_cs <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini + 24*7, 12, base$fechafin)[1, ]
+                       base$idbase, base$fechaini + 13*7, 14, base$fechafin)[1, ]
+base$t3_K_cs <- mapply(SolutionByDates_trimester3, list(modelok), "k",
+                       base$idbase, base$fechaini, base$fechafin)[1, ]
 base$w20_K_cs <- mapply(SolutionByDates, list(modelok), "k",
                         base$idbase, base$fechaini, 20, base$fechafin)[1, ]
 base$tot_K_cs <- mapply(SolutionByDates, list(modelok), "k",
@@ -209,11 +209,11 @@ tic()
 base$pct1_K_sp <- mapply(SolutionByDates, list(modelok), "k",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[2, ]
 base$t1_K_sp <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini, 12, base$fechafin)[2, ]
+                       base$idbase, base$fechaini, 13, base$fechafin)[2, ]
 base$t2_K_sp <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini + 12*7, 12, base$fechafin)[2, ]
-base$t3_K_sp <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini + 24*7, 12, base$fechafin)[2, ]
+                       base$idbase, base$fechaini + 13*7, 14, base$fechafin)[2, ]
+base$t3_K_sp <- mapply(SolutionByDates_trimester3, list(modelok), "k",
+                       base$idbase, base$fechaini, base$fechafin)[2, ]
 base$w20_K_sp <- mapply(SolutionByDates, list(modelok), "k",
                         base$idbase, base$fechaini, 20, base$fechafin)[2, ]
 base$tot_K_sp <- mapply(SolutionByDates, list(modelok), "k",
