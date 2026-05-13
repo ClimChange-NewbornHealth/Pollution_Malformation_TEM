@@ -13,10 +13,21 @@ glimpse(data_full_wide)
 ## 2. Análisis descriptivo ----
 
 table(data_full_wide$malf)
-table(data_full_wide$malf_card_bin)
+only_malf <- data_full_wide |> dplyr::filter(malf==1)
+
+table(only_malf$malf_card_bin)
+table(only_malf$malf_nerv_bin)
+table(only_malf$malf_resp_bin)
+table(only_malf$malf_dig_bin)
+table(only_malf$malf_uri_bin)
+table(only_malf$malf_og_bin)
+table(only_malf$malf_om_bin)
+table(only_malf$malf_ococ_bin)
 
 Vars <- c("edad_gest", "sexo_rn", "estacion", "a_nac", "edad_madre")
 labs <- c("Gestational age", "Sex, male", "Season of conception", "Year of birth", "Maternal age")
+
+
 
 # Values are n (%) or median (interquartile range)
 # Chi-square (correct=TRUE → corrección de Yates en tablas 2×2) o Wilcoxon rank sum
