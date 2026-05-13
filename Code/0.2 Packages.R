@@ -32,5 +32,6 @@ install_load(c("rio",
                "tictoc",
                "future",
                "future.apply",
-               "ggpubr"
+               "ggpubr",
+               "UpSetR"
                ))

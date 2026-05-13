@@ -13,7 +13,20 @@ glimpse(data_full_wide)
 ## 2. Análisis descriptivo ----
 
 table(data_full_wide$malf)
-only_malf <- data_full_wide |> dplyr::filter(malf==1)
+only_malf <- data_full_wide |> 
+  dplyr::filter(malf==1) |> 
+  select(
+    malf_card_bin, 
+    malf_nerv_bin, 
+    malf_resp_bin, 
+    malf_dig_bin, 
+    malf_uri_bin, 
+    malf_og_bin, 
+    malf_om_bin, 
+    malf_ococ_bin
+  )
+
+glimpse(only_malf)
 
 table(only_malf$malf_card_bin)
 table(only_malf$malf_nerv_bin)
@@ -24,10 +37,43 @@ table(only_malf$malf_og_bin)
 table(only_malf$malf_om_bin)
 table(only_malf$malf_ococ_bin)
 
+# Upset plot para malformaciones
+names(only_malf) <- c(
+  "Congenital heart disease", 
+  "Nervous system", 
+  "Respiratory", 
+  "Digestive", 
+  "Urinary",
+  "Genital", 
+  "Muscle", 
+  "Ocular and craniofacial")
+
+png(
+  filename = "Output/Upset_malformation.png",
+  width = 37.5,
+  height = 20,
+  units = "cm",
+  res = 300
+)
+UpSetR::upset(
+  only_malf,
+  sets = rev(names(only_malf)),
+  nsets = 8,
+  nintersects = NA,
+  order.by = "freq",
+  decreasing = c(TRUE, TRUE),
+  keep.order = TRUE,
+  #sets.bar.color = "#56B4E9",
+  #main.bar.color = "#0072B2",
+  point.size = 2.5, 
+  line.size = 0.75, 
+  matrix.color = "gray50",
+  text.scale = c(1.5, 1.5, 1.5, 1.5, 1.5, 1.5)
+  ) 
+dev.off()
+
 Vars <- c("edad_gest", "sexo_rn", "estacion", "a_nac", "edad_madre")
 labs <- c("Gestational age", "Sex, male", "Season of conception", "Year of birth", "Maternal age")
-
-
 
 # Values are n (%) or median (interquartile range)
 # Chi-square (correct=TRUE → corrección de Yates en tablas 2×2) o Wilcoxon rank sum
