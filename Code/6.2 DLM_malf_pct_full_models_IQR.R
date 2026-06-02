@@ -278,7 +278,7 @@ plot_dlm_single_pct <- function(data, contam_code, panel_title) {
     ggplot2::scale_x_continuous(breaks = seq(-11, 37, by = 3), limits = c(x_lim_pct_min, 37)) +
     ggplot2::labs(
       title = panel_title,
-      y = "HR (95% CI)",
+      y = "RR (95% CI)",
       x = "Gestational week (PCT timeline)"
     ) +
     ggplot2::theme_light(base_size = 10) +

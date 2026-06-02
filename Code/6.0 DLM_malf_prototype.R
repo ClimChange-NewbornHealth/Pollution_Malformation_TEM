@@ -156,7 +156,7 @@ g1 <- ggplot(res_combo, aes(x = Week, y = beta_exp)) +
   labs(
     #title = expression(bold("A. Overall - PM" [2.5])),
     x = "Gestational Weeks",
-    y = "OR (95% CI)"
+    y = "RR (95% CI)"
   ) +
   theme_bw() +
   theme(panel.grid = element_blank())

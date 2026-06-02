@@ -261,7 +261,7 @@ plot_dlm_single <- function(data, contam_code, panel_title) {
       labels = scales::label_number(accuracy = 0.01, decimal.mark = ".")
     ) +
     ggplot2::scale_x_continuous(breaks = seq(1, 37, by = 3), limits = c(1, 37)) +
-    ggplot2::labs(title = panel_title, y = "HR (95% CI)", x = "Gestational week") +
+    ggplot2::labs(title = panel_title, y = "RR (95% CI)", x = "Gestational week") +
     ggplot2::theme_light(base_size = 10) +
     ggplot2::theme(
       plot.title = ggplot2::element_text(size = 11, hjust = 0, face = "bold"),
