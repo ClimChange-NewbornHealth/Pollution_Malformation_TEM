@@ -279,53 +279,86 @@ ggsave("Output/Exposure_boxplot.png",
        device = ragg::agg_png)
 
 
-## 5. Tabla de correlaciones entre exposiciones (pct1, t1, t2, t3) ----
+## 5. Tabla resumen: estadísticas y correlaciones de Spearman (pct1, t1, t2, t3) ----
 
 contaminants <- c("PM25", "Levo", "K")
 cor_periods <- c("pct1", "t1", "t2", "t3")
-cor_period_labels <- c("pct1", "t1", "t2", "t3")
+cor_period_labels <- cor_periods
 
-build_correlation_matrices <- function(data, tipo) {
-  out <- list()
-  for (cont in contaminants) {
+contaminant_display <- c(
+  "PM25" = "PM2.5",
+  "Levo" = "Levoglucosan",
+  "K" = "K"
+)
+tipo_display <- c(
+  "cs" = "Temporal (fixed site)",
+  "sp" = "LUR"
+)
+period_display <- c(
+  "pct1" = "Pre-conception",
+  "t1" = "Trimester 1",
+  "t2" = "Trimester 2",
+  "t3" = "Trimester 3"
+)
+
+format_median_iqr <- function(x) {
+  x <- stats::na.omit(x)
+  if (length(x) == 0) return(NA_character_)
+  p25 <- stats::quantile(x, 0.25)
+  p75 <- stats::quantile(x, 0.75)
+  sprintf("%.1f (%.1f-%.1f)", stats::median(x), as.numeric(p25), as.numeric(p75))
+}
+
+build_correlation_summary_table <- function(data) {
+  combos <- expand.grid(
+    contaminante = contaminants,
+    tipo = c("cs", "sp"),
+    stringsAsFactors = FALSE
+  )
+
+  rows <- vector("list", nrow(combos) * length(cor_periods))
+  idx <- 0L
+
+  for (i in seq_len(nrow(combos))) {
+    cont <- combos$contaminante[i]
+    tipo <- combos$tipo[i]
     vars <- paste0(cor_periods, "_", cont, "_", tipo)
     dat <- data |>
       dplyr::select(dplyr::all_of(vars))
     colnames(dat) <- cor_period_labels
 
-    cor_mat <- stats::cor(dat, use = "pairwise.complete.obs", method = "pearson")
-    rownames(cor_mat) <- cor_period_labels
-    colnames(cor_mat) <- cor_period_labels
+    cor_mat <- stats::cor(dat, use = "pairwise.complete.obs", method = "spearman")
     cor_mat <- round(cor_mat, 2)
 
-    p_mat <- matrix(NA_real_, nrow = length(cor_period_labels), ncol = length(cor_period_labels),
-                    dimnames = list(cor_period_labels, cor_period_labels))
-    for (i in seq_along(cor_period_labels)) {
-      for (j in seq_along(cor_period_labels)) {
-        if (i == j) next
-        ct <- tryCatch(
-          stats::cor.test(dat[[i]], dat[[j]], method = "pearson", exact = FALSE),
-          error = function(e) list(p.value = NA_real_)
-        )
-        p_mat[i, j] <- ct$p.value
-      }
+    for (p in cor_periods) {
+      idx <- idx + 1L
+      v <- dat[[p]]
+      v_ok <- stats::na.omit(v)
+      rows[[idx]] <- data.frame(
+        period = unname(period_display[p]),
+        missing = sum(is.na(v)),
+        min = if (length(v_ok) > 0) round(min(v_ok), 1) else NA_real_,
+        max = if (length(v_ok) > 0) round(max(v_ok), 1) else NA_real_,
+        `Median (P25-P75)` = format_median_iqr(v),
+        pct1 = cor_mat[p, "pct1"],
+        t1 = cor_mat[p, "t1"],
+        t2 = cor_mat[p, "t2"],
+        t3 = cor_mat[p, "t3"],
+        contaminante = unname(contaminant_display[cont]),
+        tipo = unname(tipo_display[tipo]),
+        stringsAsFactors = FALSE,
+        check.names = FALSE
+      )
     }
-
-    out[[paste0("cor_", cont, "_", tipo)]] <- as.data.frame(cor_mat) |>
-      tibble::rownames_to_column("period")
-    out[[paste0("pval_", cont, "_", tipo)]] <- as.data.frame(p_mat) |>
-      tibble::rownames_to_column("period")
   }
-  out
+
+  dplyr::bind_rows(rows)
 }
 
-tabla_correlaciones <- c(
-  build_correlation_matrices(data_full_wide, "cs"),
-  build_correlation_matrices(data_full_wide, "sp")
-)
+tabla_correlaciones <- build_correlation_summary_table(data_full_wide)
 
 writexl::write_xlsx(
-  tabla_correlaciones,
+  list(Summary_statistics_correlations = tabla_correlaciones),
   path = file.path("Output", "Correlation_exposure_table.xlsx")
 )
 
@@ -350,9 +383,9 @@ format_pval_label <- function(p) {
 }
 
 make_cor_label <- function(x, y, data) {
-  test <- stats::cor.test(data[[x]], data[[y]], exact = FALSE)
+  test <- stats::cor.test(data[[x]], data[[y]], method = "spearman", exact = FALSE)
   r <- formatC(test$estimate, format = "f", digits = 2, decimal.mark = ".")
-  paste0("r = ", r, ", p", format_pval_label(test$p.value))
+  paste0("rho = ", r, ", p", format_pval_label(test$p.value))
 }
 
 build_scatter_data <- function(type_suffix) {
