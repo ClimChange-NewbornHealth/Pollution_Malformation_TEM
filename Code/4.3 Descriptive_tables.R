@@ -9,6 +9,7 @@ source("Code/0.2 Packages.R")
 data_full_wide <- rio::import("Output/Data_malf_exposure_wide.RData")
 #data_full_long <- rio::import("Output/Data_malf_exposure_long.RData")
 glimpse(data_full_wide)
+summary(data_full_wide$edad_gest) # 25-43
 
 ## 2. Análisis descriptivo ----
 
