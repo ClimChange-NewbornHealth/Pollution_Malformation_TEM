@@ -304,9 +304,10 @@ period_display <- c(
 format_median_iqr <- function(x) {
   x <- stats::na.omit(x)
   if (length(x) == 0) return(NA_character_)
-  p25 <- stats::quantile(x, 0.25)
-  p75 <- stats::quantile(x, 0.75)
-  sprintf("%.1f (%.1f-%.1f)", stats::median(x), as.numeric(p25), as.numeric(p75))
+  p25 <- as.numeric(stats::quantile(x, 0.25))
+  p75 <- as.numeric(stats::quantile(x, 0.75))
+  iqr <- p75 - p25
+  sprintf("%.1f (%.1f)", stats::median(x), iqr)
 }
 
 build_correlation_summary_table <- function(data) {
@@ -339,7 +340,7 @@ build_correlation_summary_table <- function(data) {
         missing = sum(is.na(v)),
         min = if (length(v_ok) > 0) round(min(v_ok), 1) else NA_real_,
         max = if (length(v_ok) > 0) round(max(v_ok), 1) else NA_real_,
-        `Median (P25-P75)` = format_median_iqr(v),
+        `Median (IQR, P75-P25)` = format_median_iqr(v),
         pct1 = cor_mat[p, "pct1"],
         t1 = cor_mat[p, "t1"],
         t2 = cor_mat[p, "t2"],

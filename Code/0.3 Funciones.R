@@ -17,9 +17,9 @@ ColapseByMeanDates <- function(query1, query2, data, vardate, varcolapse) {
 }
 
 ## Trimestres gestacionales (fechaini = día 0 del inicio de la semana 1)
-## T1 = semanas 1-13, T2 = 14-27, T3 = 28 hasta nacimiento (fechafin)
+## T1 = semanas 1-12, T2 = 13-26, T3 = 27 hasta nacimiento (fechafin)
 n_weeks_trimester3 <- function(fechaini, fechafin) {
-  start_t3 <- fechaini + 27L * 7L
+  start_t3 <- fechaini + 26L * 7L
   d <- as.numeric(fechafin - start_t3, units = "days")
   nw <- as.integer(pmax(1L, ceiling(pmax(0, d) / 7)))
   nw[start_t3 > fechafin] <- NA_integer_
@@ -31,7 +31,7 @@ SolutionByDates_trimester3 <- function(model, type, idbase, fechaini, fechafin) 
   nw <- as.integer(n_weeks_trimester3(fechaini, fechafin))
   if (length(nw) > 1L) nw <- nw[1L]
   if (length(nw) == 0L || is.na(nw) || nw < 1L) return(c(NA_real_, NA_real_))
-  SolutionByDates(model, type, idbase, fechaini + 27L * 7L, nw, fechafin)
+  SolutionByDates(model, type, idbase, fechaini + 26L * 7L, nw, fechafin)
 }
 
 ## Función para predecir PM por modelo en rango de tiempo ----

@@ -77,9 +77,9 @@ tic()
 base$pct1_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[1, ]
 base$t1_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini, 13, base$fechafin)[1, ]
+                          base$idbase, base$fechaini, 12, base$fechafin)[1, ]
 base$t2_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini + 13*7, 14, base$fechafin)[1, ]
+                          base$idbase, base$fechaini + 12*7, 14, base$fechafin)[1, ]
 base$t3_PM25_cs <- mapply(SolutionByDates_trimester3, list(modelopm), "pm",
                           base$idbase, base$fechaini, base$fechafin)[1, ]
 base$w20_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
@@ -89,6 +89,7 @@ base$tot_PM25_cs <- mapply(SolutionByDates, list(modelopm), "pm",
                            round((base$fechafin - base$fechaini) / 7, 0) + 2, 
                            base$fechafin)[1, ]
 toc() # 374 sec ~ 6 min
+beepr::beep(8)
 
 ## 4.2 Predicciones datos espaciales (SP) ----
 
@@ -96,9 +97,9 @@ tic()
 base$pct1_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[2, ]
 base$t1_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini, 13, base$fechafin)[2, ]
+                          base$idbase, base$fechaini, 12, base$fechafin)[2, ]
 base$t2_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
-                          base$idbase, base$fechaini + 13*7, 14, base$fechafin)[2, ]
+                          base$idbase, base$fechaini + 12*7, 14, base$fechafin)[2, ]
 base$t3_PM25_sp <- mapply(SolutionByDates_trimester3, list(modelopm), "pm",
                           base$idbase, base$fechaini, base$fechafin)[2, ]
 base$w20_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
@@ -108,6 +109,7 @@ base$tot_PM25_sp <- mapply(SolutionByDates, list(modelopm), "pm",
                            round((base$fechafin - base$fechaini) / 7, 0) + 2, 
                            base$fechafin)[2, ]
 toc() # 398 sec ~ 6 min
+beepr::beep(8)
 
 ## 4.3 Predicciones por semana de gestación (desde -12 semanas hasta final del período) ----
 
@@ -126,6 +128,7 @@ for (week in -12:max_weeks_gestational) {
                                   base$idbase, base$fechaini, week, base$fechafin)[2, ]
 }
 toc() # 2352 ~ 40 min
+beepr::beep(8)
 
 ## 5 Predicciones modelo Levo --------------------------------------------------------
 
@@ -135,9 +138,9 @@ tic()
 base$pct1_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[1, ]
 base$t1_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini, 13, base$fechafin)[1, ]
+                          base$idbase, base$fechaini, 12, base$fechafin)[1, ]
 base$t2_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini + 13*7, 14, base$fechafin)[1, ]
+                          base$idbase, base$fechaini + 12*7, 14, base$fechafin)[1, ]
 base$t3_Levo_cs <- mapply(SolutionByDates_trimester3, list(modelolevo), "levo",
                           base$idbase, base$fechaini, base$fechafin)[1, ]
 base$w20_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
@@ -147,6 +150,7 @@ base$tot_Levo_cs <- mapply(SolutionByDates, list(modelolevo), "levo",
                            round((base$fechafin - base$fechaini) / 7, 0) + 2, 
                            base$fechafin)[1, ]
 toc() # 528 sec ~ 8.8 min
+beepr::beep(8)
 
 ## 5.2 Predicciones datos espaciales (SP) ----
 
@@ -154,9 +158,9 @@ tic()
 base$pct1_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[2, ]
 base$t1_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini, 13, base$fechafin)[2, ]
+                          base$idbase, base$fechaini, 12, base$fechafin)[2, ]
 base$t2_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
-                          base$idbase, base$fechaini + 13*7, 14, base$fechafin)[2, ]
+                          base$idbase, base$fechaini + 12*7, 14, base$fechafin)[2, ]
 base$t3_Levo_sp <- mapply(SolutionByDates_trimester3, list(modelolevo), "levo",
                           base$idbase, base$fechaini, base$fechafin)[2, ]
 base$w20_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
@@ -166,6 +170,7 @@ base$tot_Levo_sp <- mapply(SolutionByDates, list(modelolevo), "levo",
                            round((base$fechafin - base$fechaini) / 7, 0) + 2, 
                            base$fechafin)[2, ]
 toc() # 503 sec ~ 8.3 min
+beepr::beep(8)
 
 ## 5.3 Predicciones por semana de gestación (desde -12 semanas hasta final del período) ----
 
@@ -181,6 +186,7 @@ for (week in -12:max_weeks_gestational) {
                                   base$idbase, base$fechaini, week, base$fechafin)[2, ]
 }
 toc() # 3692,505 ~ 60 min 
+beepr::beep(8)
 
 ## 6. Predicciones modelo K --------------------------------------------------------
 
@@ -190,9 +196,9 @@ tic()
 base$pct1_K_cs <- mapply(SolutionByDates, list(modelok), "k",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[1, ]
 base$t1_K_cs <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini, 13, base$fechafin)[1, ]
+                       base$idbase, base$fechaini, 12, base$fechafin)[1, ]
 base$t2_K_cs <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini + 13*7, 14, base$fechafin)[1, ]
+                       base$idbase, base$fechaini + 12*7, 14, base$fechafin)[1, ]
 base$t3_K_cs <- mapply(SolutionByDates_trimester3, list(modelok), "k",
                        base$idbase, base$fechaini, base$fechafin)[1, ]
 base$w20_K_cs <- mapply(SolutionByDates, list(modelok), "k",
@@ -202,6 +208,7 @@ base$tot_K_cs <- mapply(SolutionByDates, list(modelok), "k",
                         round((base$fechafin - base$fechaini) / 7, 0) + 2, 
                         base$fechafin)[1, ]
 toc() # 562,006 sec ~ 8 min
+beepr::beep(8)
 
 ## 6.2 Predicciones datos espaciales (SP) ----
 
@@ -209,9 +216,9 @@ tic()
 base$pct1_K_sp <- mapply(SolutionByDates, list(modelok), "k",
                           base$idbase, base$fechaini - 12*7, 12, base$fechafin)[2, ]
 base$t1_K_sp <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini, 13, base$fechafin)[2, ]
+                       base$idbase, base$fechaini, 12, base$fechafin)[2, ]
 base$t2_K_sp <- mapply(SolutionByDates, list(modelok), "k",
-                       base$idbase, base$fechaini + 13*7, 14, base$fechafin)[2, ]
+                       base$idbase, base$fechaini + 12*7, 14, base$fechafin)[2, ]
 base$t3_K_sp <- mapply(SolutionByDates_trimester3, list(modelok), "k",
                        base$idbase, base$fechaini, base$fechafin)[2, ]
 base$w20_K_sp <- mapply(SolutionByDates, list(modelok), "k",
@@ -221,6 +228,7 @@ base$tot_K_sp <- mapply(SolutionByDates, list(modelok), "k",
                         round((base$fechafin - base$fechaini) / 7, 0) + 2, 
                         base$fechafin)[2, ]
 toc() # 561,775 sec ~ 9 min
+beepr::beep(8)
 
 ## 6.3 Predicciones por semana de gestación (desde -12 semanas hasta final del período) ----
 
@@ -236,6 +244,7 @@ for (week in -12:max_weeks_gestational) {
                                   base$idbase, base$fechaini, week, base$fechafin)[2, ]
 }
 toc() # 4627,375 sec ~ 77 min
+beepr::beep(8)
 
 ## 7. Guardamos los resultados --------------------------------------------------------
 
